@@ -13,16 +13,26 @@ namespace ProjetoX
         {
             try
             {
-                Tabuleiro tab = new Tabuleiro(8, 8);
+                PartidaDeXadrez partida = new PartidaDeXadrez();
 
-                tab.ColocarPeca(new Torre(tab, Cores.Preta), new Posicao(0, 0));
-                tab.ColocarPeca(new Torre(tab, Cores.Preta), new Posicao(1, 4));
-                tab.ColocarPeca(new Rei(tab, Cores.Preta), new Posicao(1, 5));
+                while (!partida.Terminada)
+                {
+                    Console.Clear();
+                    Tela.ImprimirTabuleiro(partida.tab);
+
+                    Console.WriteLine();
+                    Console.Write("Orgiem: ");
+                    Posicao origem = Tela.lerPosicaoXadrez().toPosicao();
+                    Console.Write("Destino: ");
+                    Posicao destino = Tela.lerPosicaoXadrez().toPosicao();
+
+                    partida.ExecutaMovimento(origem, destino);
+
+                }
 
 
-                tab.ColocarPeca(new Torre(tab, Cores.Azul), new Posicao(3, 5));
-                Tela.ImprimirTabuleiro(tab);
-                Console.ReadLine();
+                
+             
             }
             catch (TabuleiroException ex)
             {
