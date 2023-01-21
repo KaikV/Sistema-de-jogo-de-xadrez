@@ -11,19 +11,12 @@ namespace ProjetoX
     {
         static void Main(string[] args)
         {
-            try { 
-            Tabuleiro tab = new Tabuleiro(8, 8);
-           
-            tab.ColocarPeca(new Torre(tab, Cores.Preta) , new Posicao(0, 0));
-            tab.ColocarPeca(new Torre(tab, Cores.Preta), new Posicao(1, 9));
-            tab.ColocarPeca(new Rei(tab, Cores.Preta), new Posicao(0, 0));
-            Tela.ImprimirTabuleiro(tab);
+
+            PosicaoXadrez pos = new PosicaoXadrez('c', 7);
+
+            Console.WriteLine(pos.toPosicao());
 
             Console.ReadLine();
-            }
-            catch (TabuleiroException ex) {
-                Console.WriteLine(ex.Message);
-            }
         }
     }
 }
