@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using tabuleiro;
 using xadrex_C;
 using xadrez;
@@ -10,15 +11,19 @@ namespace ProjetoX
     {
         static void Main(string[] args)
         {
+            try { 
             Tabuleiro tab = new Tabuleiro(8, 8);
-            
+           
             tab.ColocarPeca(new Torre(tab, Cores.Preta) , new Posicao(0, 0));
-            tab.ColocarPeca(new Torre(tab, Cores.Preta), new Posicao(1, 3));
-            tab.ColocarPeca(new Rei(tab, Cores.Preta), new Posicao(2, 4));
+            tab.ColocarPeca(new Torre(tab, Cores.Preta), new Posicao(1, 9));
+            tab.ColocarPeca(new Rei(tab, Cores.Preta), new Posicao(0, 0));
             Tela.ImprimirTabuleiro(tab);
 
             Console.ReadLine();
-
+            }
+            catch (TabuleiroException ex) {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
