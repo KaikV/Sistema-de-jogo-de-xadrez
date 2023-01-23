@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Runtime.ConstrainedExecution;
+using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using tabuleiro;
 using xadrez;
 
@@ -7,7 +8,40 @@ namespace xadrez_c;
 
 class Tela
 {
+    public static void ImprimirPartida(PartidaDeXadrez partida)
+    {
+        ImprimirTabuleiro(partida.tab);
+        Console.WriteLine();
+        ImprimirPecasCapturdas(partida);
+        Console.WriteLine();
+        Console.WriteLine("Turno: " + partida.turno);
+        Console.WriteLine("Aguardando jogada: " + partida.jogadorAtual);
 
+
+    }
+    public static void ImprimirPecasCapturdas(PartidaDeXadrez partida)
+    {
+        Console.WriteLine("Peças capturadas:");
+        Console.Write("Brancas: ");
+        ImprimirConjuto(partida.pecasCapturas(Cores.Branca));
+        Console.WriteLine();
+        Console.Write("Pretas: ");
+        ConsoleColor aux = Console.ForegroundColor;
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        ImprimirConjuto(partida.pecasCapturas(Cores.Preta));
+        Console.ForegroundColor = aux;
+        Console.WriteLine();
+    }
+
+    public static void ImprimirConjuto(HashSet<Peca> conjunto)
+    {
+        Console.Write("[");
+        foreach (Peca x in conjunto)
+        {
+            Console.Write(x + " ");
+        }
+        Console.Write("]");
+    }
     public static void ImprimirTabuleiro(Tabuleiro tab)
     {
 
