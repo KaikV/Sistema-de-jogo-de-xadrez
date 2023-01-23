@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
 using tabuleiro;
-using xadrex_C;
 using xadrez;
+using xadrez_c;
 
 namespace ProjetoX
 {
@@ -21,8 +21,15 @@ namespace ProjetoX
                     Tela.ImprimirTabuleiro(partida.tab);
 
                     Console.WriteLine();
-                    Console.Write("Orgiem: ");
+                    Console.Write("Origem: ");
                     Posicao origem = Tela.lerPosicaoXadrez().toPosicao();
+
+                    bool[,] posicoesPossiveis = partida.tab.peca(origem).MovimentosPossiveis();
+
+                    Console.Clear();
+                    Tela.ImprimirTabuleiro(partida.tab, posicoesPossiveis);
+
+                    Console.WriteLine();
                     Console.Write("Destino: ");
                     Posicao destino = Tela.lerPosicaoXadrez().toPosicao();
 
