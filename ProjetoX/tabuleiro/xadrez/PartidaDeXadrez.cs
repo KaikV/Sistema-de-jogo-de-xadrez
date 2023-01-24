@@ -58,9 +58,9 @@ namespace xadrez
                 tab.ColocarPeca(T, destinoT);
             }
             //#Jogadaespecial En-passant
-            if(p is Peao)
+            if (p is Peao)
             {
-                if(origem.coluna != destino.coluna && pecaCapturada == null)
+                if (origem.coluna != destino.coluna && pecaCapturada == null)
                 {
                     Posicao posP;
                     if (p.cor == Cores.Branca)
@@ -69,7 +69,7 @@ namespace xadrez
                     }
                     else
                     {
-                        posP = new Posicao(destino.linha -1, destino.coluna);
+                        posP = new Posicao(destino.linha - 1, destino.coluna);
                     }
                     pecaCapturada = tab.RetirarPeca(posP);
                     capturadas.Add(pecaCapturada);
@@ -109,13 +109,13 @@ namespace xadrez
             }
             //#jogadaespecial En-passant
 
-            if(p is Peao)
+            if (p is Peao)
             {
                 if (origem.coluna != destino.coluna && pecaCapturada == VuneravelEnPassant)
                 {
                     Peca peao = tab.RetirarPeca(destino);
                     Posicao posP;
-                    if(p.cor == Cores.Branca)
+                    if (p.cor == Cores.Branca)
                     {
                         posP = new Posicao(3, destino.coluna);
 
@@ -127,7 +127,7 @@ namespace xadrez
                     tab.ColocarPeca(peao, posP);
                 }
             }
-            
+
         }
         public void realizaJogada(Posicao origem, Posicao destino)
         {
@@ -139,6 +139,21 @@ namespace xadrez
                     throw new TabuleiroException("Você nao pode se colocar em xeque!");
                 }
 
+
+            }
+            Peca p = tab.peca(destino);
+            //jogadaespecial promocao
+            if (p is Peao)
+            {
+                if ((p.cor == Cores.Branca && destino.linha == 0) || p.cor == Cores.Preta && destino.linha == 7)
+                {
+                    p = tab.RetirarPeca(destino);
+                    pecas.Remove(p);
+                    Peca dama = new Dama(tab, p.cor);
+                    tab.ColocarPeca(dama, destino);
+                    pecas.Add(dama);
+
+                }
             }
             if (EstaEmXeque(Adversaria(jogadorAtual)))
             {
@@ -157,9 +172,9 @@ namespace xadrez
                 turno++;
                 mudaJogador();
             }
-            Peca p = tab.peca(destino);
+
             //#Jogadaespecial En-Passant
-            if (p is Peao && (destino.linha == origem.linha - 2 || destino.linha ==origem.linha + 2))
+            if (p is Peao && (destino.linha == origem.linha - 2 || destino.linha == origem.linha + 2))
             {
                 VuneravelEnPassant = p;
             }
