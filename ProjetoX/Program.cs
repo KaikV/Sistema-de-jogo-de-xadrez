@@ -49,6 +49,8 @@ namespace ProjetoX
                 }
 
 
+                Console.Clear();
+                Tela.ImprimirPartida(partida);
 
 
             }

@@ -15,10 +15,18 @@ class Tela
         ImprimirPecasCapturdas(partida);
         Console.WriteLine();
         Console.WriteLine("Turno: " + partida.turno);
-        Console.WriteLine("Aguardando jogada: " + partida.jogadorAtual);
-        if (partida.Xeque)
+        if (!partida.terminada)
         {
-            Console.WriteLine("XEQUE!");
+            Console.WriteLine("Aguardando jogada: " + partida.jogadorAtual);
+            if (partida.Xeque)
+            {
+                Console.WriteLine("Capivarou!");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Mates Com Tomates!");
+            Console.WriteLine("Vencedor: " + partida.jogadorAtual);
         }
 
     }
