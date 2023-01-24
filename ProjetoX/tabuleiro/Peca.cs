@@ -19,6 +19,10 @@
         {
             qteMovimentos++;
         }
+        public void RemoverQteMovimento ()
+        {
+            qteMovimentos--;
+        }
         public bool ExisteMovimentosPossiveis()
         {
             bool[,] mat = MovimentosPossiveis();
