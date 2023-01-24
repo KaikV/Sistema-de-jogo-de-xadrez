@@ -5,9 +5,10 @@ namespace xadrez
 {
     class Peao : Peca
     {
-
-        public Peao(Tabuleiro tab, Cores cor) : base(tab, cor)
+        private PartidaDeXadrez partida;
+        public Peao(Tabuleiro tab, Cores cor, PartidaDeXadrez partida) : base(tab, cor)
         {
+            this.partida = partida;
         }
 
         public override string ToString()
@@ -55,6 +56,22 @@ namespace xadrez
                 {
                     mat[pos.linha, pos.coluna] = true;
                 }
+                //#jogadaespecial En-passant
+                if (posicao.linha == 3)
+                {
+                    Posicao esquerda = new Posicao(posicao.linha, posicao.coluna - 1);
+                    if (tab.PosicaoValida(esquerda) && existeInimigo(esquerda) && tab.peca(esquerda) == partida.VuneravelEnPassant)
+                    {
+                        mat[esquerda.linha - 1, esquerda.coluna] = true;
+                    }
+                }
+                Posicao direta = new Posicao(posicao.linha, posicao.coluna + 1);
+                if (tab.PosicaoValida(direta) && existeInimigo(direta) && tab.peca(direta) == partida.VuneravelEnPassant)
+                {
+                    mat[direta.linha- 1, direta.coluna] = true;
+                }
+
+
             }
             else
             {
@@ -78,6 +95,19 @@ namespace xadrez
                 if (tab.PosicaoValida(pos) && existeInimigo(pos))
                 {
                     mat[pos.linha, pos.coluna] = true;
+                }
+                if (posicao.linha == 4)
+                {
+                    Posicao esquerda = new Posicao(posicao.linha, posicao.coluna - 1);
+                    if (tab.PosicaoValida(esquerda) && existeInimigo(esquerda) && tab.peca(esquerda) == partida.VuneravelEnPassant)
+                    {
+                        mat[esquerda.linha + 1, esquerda.coluna] = true;
+                    }
+                }
+                Posicao direta = new Posicao(posicao.linha, posicao.coluna + 1);
+                if (tab.PosicaoValida(direta) && existeInimigo(direta) && tab.peca(direta) == partida.VuneravelEnPassant)
+                {
+                    mat[direta.linha + 1, direta.coluna] = true;
                 }
             }
 
